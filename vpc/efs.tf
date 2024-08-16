@@ -36,3 +36,26 @@ resource "aws_efs_file_system" "efs_file_system" {
     transition_to_ia = "AFTER_30_DAYS"
   }
 }
+
+
+resource "aws_security_group" "efs_sg" {
+  vpc_id      = module.vpc.vpc_id
+  name        = local.Environment.efs_sg_name
+  description = "Allow 22 only"
+  ingress {
+    description = "EFS"
+    from_port   = 2049
+    to_port     = 2049
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+  egress {
+    from_port   = 0
+    to_port     = 0
+    protocol    = "-1"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+  tags = {
+    Name = local.Environment.efs_sg_name
+  }
+}

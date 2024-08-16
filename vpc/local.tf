@@ -9,6 +9,7 @@ locals {
 
       lb_sg_name       = "lb_sq_dev"
       instance_sg_name = "instance_sq_dev"
+      efs_sg_name = "efs_sq_dev"
       lb_name          = "lb-tf-dev"
 
       target_group_name = "lg-target-dev"
