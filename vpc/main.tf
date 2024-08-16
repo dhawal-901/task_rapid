@@ -8,9 +8,9 @@ terraform {
   }
 
   backend "s3" {
-    bucket  = "tf-bucket00"
+    bucket  = "jenkins-task-2-node-app-94144 "
     encrypt = true
-    key     = "Tasks/alb_terraform/terraform.tfstate"
+    key     = "terrbac"
     region  = "ap-south-1"
   }
 }
