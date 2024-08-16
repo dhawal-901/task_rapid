@@ -1,7 +1,3 @@
-resource "aws_key_pair" "my_key" {
-  key_name   = "my_key2"
-  public_key = file("../../../keys/private-1.pub")
-}
 
 
 resource "aws_instance" "my_public_instance" {
@@ -9,7 +5,7 @@ resource "aws_instance" "my_public_instance" {
   instance_type               = local.Environment.ubuntu_instance_type
   subnet_id                   = module.vpc.public_subnets[0]
   vpc_security_group_ids      = [aws_security_group.my_public_sg.id, aws_security_group.my_public_sg_2.id]
-  key_name                    = aws_key_pair.my_key.key_name
+  key_name                    = "terraform"
   associate_public_ip_address = true
 
   tags = {
@@ -24,7 +20,7 @@ resource "aws_instance" "my_private_instance" {
   instance_type          = local.Environment.ubuntu_instance_type
   subnet_id              = module.vpc.private_subnets[(count.index) % 2]
   vpc_security_group_ids = [aws_security_group.my_public_sg.id, aws_security_group.my_public_sg_2.id]
-  key_name               = aws_key_pair.my_key.key_name
+  key_name               = "terraform"
   tags = {
     Name = "PRIVATE_INSTANCE_TF_${count.index + 1}_${terraform.workspace}"
   }
