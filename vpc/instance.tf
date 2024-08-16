@@ -11,7 +11,7 @@ resource "aws_instance" "my_public_instance" {
   tags = {
     Name = "PUBLIC_INSTANCE_TF_${terraform.workspace}"
   }
-  depends_on = [module.vpc, aws_key_pair.my_key]
+  depends_on = [module.vpc]
 }
 
 resource "aws_instance" "my_private_instance" {
@@ -24,5 +24,5 @@ resource "aws_instance" "my_private_instance" {
   tags = {
     Name = "PRIVATE_INSTANCE_TF_${count.index + 1}_${terraform.workspace}"
   }
-  depends_on = [module.vpc, aws_key_pair.my_key]
+  depends_on = [module.vpc]
 }
